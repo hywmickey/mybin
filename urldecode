@@ -1,0 +1,27 @@
+#!/usr/bin/env php
+<?php
+
+if(isset($argv[1])) {
+    $arr = urldecode($argv[1]);
+
+    echo PHP_EOL;
+    echo "urldecode:",PHP_EOL;
+    if(!is_array($arr) && empty($arr) ) {
+        var_dump($arr);
+    } else {
+        print_r($arr);
+    }
+
+    echo PHP_EOL;
+    echo PHP_EOL;
+    echo "params:",PHP_EOL;
+    parse_str($argv[1], $arrParams);
+    if(!is_array($arrParams) && empty($arrParams) ) {
+        var_dump($arrParams);
+    } else {
+        print_r($arrParams);
+    }
+
+} else {
+    echo "Usage: urldecode 'name=zhang+san&desc=IT+engineer'",PHP_EOL;
+}

@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+
+if(isset($argv[1])) {
+    $arr = json_decode($argv[1],true);
+    if(!is_array($arr) && empty($arr) ) {
+        var_dump($arr);
+    } else {
+        print_r($arr);
+    }
+} else {
+    echo 'Usage: jsondecode \'{"name":"zhang san","desc":"IT engineer"}\'';
+}
+

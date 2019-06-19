@@ -1,0 +1,14 @@
+#!/usr/bin/env php
+<?php
+if(isset($argv[1])) {
+    if(!preg_match('/^\d+$/', $argv[1])) {
+        echo "int_time error";
+        die();
+    } 
+
+    echo date("Y-m-d H:i:s", $argv[1]);
+
+} else {
+    echo "Usage: from_unixtime ".time();
+}
+
