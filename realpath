@@ -1,0 +1,17 @@
+#!/usr/bin/env php
+<?php
+
+$arrDateTime = array();
+
+if(isset($argv[1])) {
+    $realpath = realpath($argv[1]);
+    if(empty($realpath)) {
+         echo "no path",PHP_EOL;
+    } else {
+        echo $realpath, PHP_EOL;
+    }
+} else {
+    echo "Usage: realpath './'";
+
+}
+
