@@ -31,9 +31,9 @@ if(isset($argv[2])) {
 
 if(!empty($arrDateTime)) {
     $strTime = implode(' ', $arrDateTime);
-    echo strtotime($strTime);
+    echo strtotime($strTime),PHP_EOL;
 } else {
     $intTime = time();
-    echo date('Y-m-d H:i:s'),"\t",time();
+    echo date('Y-m-d H:i:s'),"\t",time(), PHP_EOL;
 }
 
