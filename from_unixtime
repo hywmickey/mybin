@@ -11,4 +11,4 @@ if(isset($argv[1])) {
 } else {
     echo "Usage: from_unixtime ".time();
 }
-
+echo PHP_EOL;
