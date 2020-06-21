@@ -1,0 +1,60 @@
+#!/bin/bash
+
+set -e # 告诉bash如果任何语句的执行结果不是true则应该退出。
+
+PID_FILE=/usr/local/var/run/php-fpm.pid
+
+start() {
+	echo "start nginx "
+	php-fpm
+}
+
+stop() {
+
+	echo "stop php-fpm "
+	if [[ ! -f $PID_FILE ]]; then
+		return
+	fi
+
+	PID=`head $PID_FILE`
+	if [[ $PID > 0 ]]; then
+		#statements
+		echo 'stop php-fpm sucess'
+		kill -INT $PID
+	fi
+}
+
+
+restart() {
+
+	echo "retart php-fpm "
+	if [[ ! -f $PID_FILE ]]; then
+		start
+	fi
+
+	PID=`head $PID_FILE`
+	if [[ $PID > 0 ]]; then
+		#statements
+		echo 'retart php-fpm sucess'
+		kill -USR2 $PID
+	fi
+}
+
+case  "$1" in 
+	start)
+		stop
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		restart
+		;;
+	ckconf)
+		nginx -t
+		;;
+	*)
+		echo "this is default"
+
+esac

@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -e # 告诉bash如果任何语句的执行结果不是true则应该退出。
+
+PID_FILE=/usr/local/var/run/nginx.pid
+
+start() {
+	echo "start nginx "
+	nginx
+}
+
+stop() {
+
+	echo "stop nginx "
+	if [[ ! -f $PID_FILE ]]; then
+		return
+	fi
+
+	PID=`head $PID_FILE`
+	if [[ $PID > 0 ]]; then
+		#statements
+		echo 'stop nginx sucess'
+		kill $PID
+		# nginx -s stop 
+	fi
+}
+
+
+case  "$1" in 
+	start)
+		stop
+		start
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop
+		start
+		;;
+	ckconf)
+		nginx -t
+		;;
+	*)
+		echo "this is default"
+
+esac
