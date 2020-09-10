@@ -1,0 +1,49 @@
+#!/bin/bash
+set -e 
+
+# /usr/local/Cellar/mysql/8.0.19/bin/mysqld_safe --datadir="/Users/baidu/Documents/server/mysql/data" --pid-file="/usr/local/var/mysql/mysql.pid"
+PID_FILE=/usr/local/var/mysql/mysql.pid
+datadir=/Users/baidu/Documents/server/mysql/data
+PID_FILE=/usr/local/var/mysql/mysql.pid
+start() {
+	
+	/usr/local/Cellar/mysql/8.0.19/bin/mysqld_safe --datadir="$datadir" --pid-file="$PID_FILE" > /dev/null &
+	echo "start mysql sucess"
+}
+
+
+stop() {
+
+	echo "stop mysql "
+	if [[ ! -f $PID_FILE ]]; then
+		return
+	fi
+
+	PID=`head $PID_FILE`
+	if [[ $PID > 0 ]]; then
+		#statements
+		
+		kill $PID && echo 'stop mysql sucess'
+		# nginx -s stop 
+	fi
+}
+
+
+case  "$1" in 
+	start)
+		stop
+		sleep 3
+		start
+		
+		;;
+	stop)
+		stop
+		;;
+	restart)
+		stop 
+		start
+		;;
+	*)
+		echo "this is default"
+
+esac

@@ -1,0 +1,11 @@
+#!/bin/bash
+file=$1;
+#echo $file;
+if [ -d "$file" ]; then 
+	cd $file;
+	#echo ':';
+else
+	
+	dirname=`dirname $file`;
+	cd $dirname;
+fi

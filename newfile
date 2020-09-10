@@ -1,0 +1,49 @@
+#!/usr/bin/env php
+<?php
+
+if(!isset($argv[1])) {
+    echo "请输入文件名",PHP_EOL;
+    die();
+}
+
+$filename = $argv[1];
+// 获取后缀
+$pathinfo = pathinfo($filename);
+print_r($pathinfo);
+
+if(file_exists($filename)) {
+    echo '文件已存在',PHP_EOL;
+    die();
+}
+
+
+$content = getContentByExtension($pathinfo['extension']);
+
+if(!file_put_contents($filename, $content)) {
+    echo '文件创建失败',PHP_EOL;
+    die();
+}
+
+echo 'success',PHP_EOL;
+die();
+function getContentByExtension($strExention) {
+    $content = '';
+    if($strExention == 'html') {
+        $content = <<<CONTENT
+<html>
+    <head>
+        <title>title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        some content.
+        <script></script>
+    </body>
+</html>
+CONTENT;
+    }
+
+    $content = trim($content);
+    return $content;
+}

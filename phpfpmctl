@@ -6,7 +6,7 @@ PID_FILE=/usr/local/var/run/php-fpm.pid
 
 start() {
 	echo "start nginx "
-	php-fpm
+	php-fpm -p /usr/local/var/ -c /usr/local/etc/php/7.3/php.ini -y /usr/local/etc/php/7.3/php-fpm.conf
 }
 
 stop() {

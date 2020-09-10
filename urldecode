@@ -19,6 +19,7 @@ if(isset($argv[1])) {
     if(!is_array($arrParams) && empty($arrParams) ) {
         var_dump($arrParams);
     } else {
+    var_export( $arrParams );
         print_r($arrParams);
     }
 
