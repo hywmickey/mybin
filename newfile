@@ -9,7 +9,7 @@ if(!isset($argv[1])) {
 $filename = $argv[1];
 // 获取后缀
 $pathinfo = pathinfo($filename);
-print_r($pathinfo);
+//print_r($pathinfo);
 
 if(file_exists($filename)) {
     echo '文件已存在',PHP_EOL;
@@ -17,22 +17,22 @@ if(file_exists($filename)) {
 }
 
 
-$content = getContentByExtension($pathinfo['extension']);
+$content = getContentByExtension($pathinfo['extension'], $pathinfo['basename']);
 
-if(!file_put_contents($filename, $content)) {
+if(file_put_contents($filename, $content) === false) {
     echo '文件创建失败',PHP_EOL;
     die();
 }
 
 echo 'success',PHP_EOL;
 die();
-function getContentByExtension($strExention) {
+function getContentByExtension($strExention, $basename) {
     $content = '';
     if($strExention == 'html') {
         $content = <<<CONTENT
 <html>
     <head>
-        <title>title</title>
+        <title>{$basename}</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
