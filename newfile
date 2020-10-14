@@ -37,10 +37,32 @@ function getContentByExtension($strExention, $basename) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        some content.
+        {$basename} content.
         <script></script>
     </body>
 </html>
+CONTENT;
+    } elseif($strExention == 'js') {
+        $content = <<<CONTENT
+(function(){
+    var pageConf =  {
+
+    };
+    fk.conf.page = pageConf;
+})();
+CONTENT;
+    } elseif($strExention == 'go') {
+        $content = <<<CONTENT
+/**
+    说明
+*/
+package main
+import (
+    "fmt"
+)
+func main() {
+
+}
 CONTENT;
     }
 
