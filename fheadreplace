@@ -1,6 +1,8 @@
 #!/usr/bin/env php
 <?php
-
+/*
+	说明：用第一个文件的内容替换第二个文件开头的内容
+*/
 class obj {
 	function run($argv) {
 		if(count($argv) < 3) {
