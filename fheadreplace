@@ -26,7 +26,7 @@ class obj {
 
 
 		$fp1 = fopen($file1, 'rb');
-		$fp2 = fopen($file2, 'r+');
+		$fp2 = fopen($file2, 'rb+');
 
 		$len = filesize($file1);
 
