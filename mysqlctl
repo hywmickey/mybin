@@ -7,7 +7,7 @@ datadir=/Users/baidu/Documents/server/mysql/data
 PID_FILE=/usr/local/var/mysql/mysql.pid
 start() {
 	
-	/usr/local/Cellar/mysql/8.0.19/bin/mysqld_safe --datadir="$datadir" --pid-file="$PID_FILE" > /dev/null &
+	/usr/local/Cellar/mysql/8.0.22_1/bin/mysqld_safe --datadir="$datadir" --pid-file="$PID_FILE" > /dev/null &
 	echo "start mysql sucess"
 }
 
@@ -21,10 +21,14 @@ stop() {
 
 	PID=`head $PID_FILE`
 	if [[ $PID > 0 ]]; then
-		#statements
-		
-		kill $PID && echo 'stop mysql sucess'
-		# nginx -s stop 
+
+		count=`ps -ef | grep $PID  | grep 'mysql'  | wc -l`
+		if [ 0 == $count ];then
+			rm $PID_FILE
+		else
+			#statements
+			kill $PID && echo 'stop mysql sucess'
+		fi
 	fi
 }
 

@@ -34,9 +34,16 @@ restart() {
 
 	PID=`head $PID_FILE`
 	if [[ $PID > 0 ]]; then
-		#statements
-		echo 'retart php-fpm sucess'
-		kill -USR2 $PID
+		count=`ps -ef | grep $PID  | grep 'php-fpm'  | wc -l`
+		if [ 0 == $count ];then
+			rm $PID_FILE
+		else
+			#statements
+			echo 'retart php-fpm sucess'
+			kill -USR2 $PID
+		fi
+
+
 	fi
 }
 
