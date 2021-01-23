@@ -1,0 +1,50 @@
+#!/usr/bin/env php
+<?php
+/*
+	说明：用第一个文件的内容替换第二个文件开头的内容
+*/
+class obj {
+	function run($argv) {
+		if(count($argv) < 3) {
+			echo "参数输入错误",PHP_EOL;
+			echo "usage: ",basename(__FILE__)," file1 file2",PHP_EOL;
+
+			die();
+		}
+
+		$file1 = $argv[1];
+		$file2 = $argv[2];
+		if(!file_exists($file1)) {
+			echo "第一个文件不存在",PHP_EOL;
+			die();
+		}
+
+		if(!file_exists($file2)) {
+			echo "第二个文件不存在",PHP_EOL;
+			die();
+		}
+
+
+		$fp1 = fopen($file1, 'rb');
+		$fp2 = fopen($file2, 'rb+');
+
+		$len = filesize($file1);
+
+		$contents = fread($fp1, $len);
+
+
+		fseek($fp2, 0);
+		fwrite($fp2, $contents);
+
+		fclose($fp1);
+		fclose($fp2);
+
+		echo "done!",PHP_EOL;
+
+	}
+
+}
+
+
+$obj = new obj();
+$obj->run($argv);
