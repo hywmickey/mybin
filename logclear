@@ -1,5 +1,0 @@
-#!/bin/bash
-rm -f /Users/baidu/Documents/git/yymath/log/yymath/*
-rm -f /Users/baidu/Documents/git/yymath/log/ral/*
-rm -f /Users/baidu/Documents/git/yymath/clog/php/*
-rm -f /Users/baidu/Documents/git/yymath/clog/webserver/*
