@@ -18,10 +18,18 @@ stop() {
 
 	PID=`head $PID_FILE`
 	if [[ $PID > 0 ]]; then
-		#statements
-		echo 'stop nginx sucess'
-		kill $PID
-		# nginx -s stop 
+
+		count=`ps -ef | grep $PID  | grep 'nginx'  | wc -l`
+		if [ 0 == $count ];then
+			rm $PID_FILE
+		else
+			#statements
+			echo 'stop nginx sucess'
+			kill $PID
+		fi
+
+
+
 	fi
 }
 

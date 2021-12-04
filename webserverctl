@@ -10,14 +10,14 @@ start() {
 
 stop() {
 
-	phpfpmctl stop && nginxctl stop
-    #phpfpmctl stop && nginxctl stop && mysqlctl stop
+	#phpfpmctl stop && nginxctl stop
+    phpfpmctl stop && nginxctl stop && mysqlctl stop
 }
 
 
 restart() {
-	phpfpmctl restart && nginxctl restart
-    #phpfpmctl restart && nginxctl restart && mysqlctl start
+	#phpfpmctl restart && nginxctl restart
+    phpfpmctl restart && nginxctl restart && mysqlctl start
 }
 
 case  "$1" in 
