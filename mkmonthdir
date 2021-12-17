@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+$strdate=date("Ym");
+if ( !isset($argv[1])|| strlen($argv[1]) == 0) {
+	echo "ERR: 请输入目录名",PHP_EOL;
+	die();
+}
+$filename = $strdate;
+if ($argv[1] != '-') {
+    $filename .= $argv[1];  
+}
+exec("mkdir ${filename}");
