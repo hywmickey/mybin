@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+$strdate=date("Ymd");
+if ( !isset($argv[1])|| strlen($argv[1]) == 0) {
+	echo "请输入文件名";
+	die();
+}
+$filename = $strdate.$argv[1];
+exec("touch ${filename}");
