@@ -1,0 +1,60 @@
+#!/usr/bin/env php
+<?php
+
+class obj {
+	function run($argv) {
+		if(count($argv) < 2) {
+			echo "参数输入错误",PHP_EOL;
+			echo "usage: ",basename(__FILE__)," file1 file2",PHP_EOL;
+
+			die();
+		}
+
+		$file1 = $argv[1];
+		if(!file_exists($file1)) {
+			echo "第一个文件不存在",PHP_EOL;
+			die();
+		}
+
+		$jsonContent = file_get_contents($file1);
+		//var_dump($jsonContent);
+		//echo $jsonContent;
+
+		$jsonObj = json_decode($jsonContent, true);
+		// print_r($jsonObj);
+		$result_pretty = json_encode($jsonObj, JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE);
+		//echo $result_pretty;
+
+		$lines = explode("\n", $result_pretty);
+
+		//var_dump($lines);
+
+		$pattern = "/\ +/uS";
+
+		foreach ($lines as $k => $v) {
+			// code...
+			$pattern = "/^\ +/";
+			if (preg_match($pattern, $v,$m)) {
+				//var_dump($m);
+				$spaceNum = strlen($m[0]);
+				if($spaceNum % 4 == 0) {
+					$newSpaceNum = $spaceNum / 4;
+					$newSpaceStr = str_repeat(" ", $newSpaceNum);
+					$lines[$k] = preg_replace($pattern, $newSpaceStr, $v);
+				}
+			}
+		}
+
+		echo implode("\n", $lines);
+/*
+		if (preg_match_all($pattern, $result_pretty, $m)) {
+			//var_dump($m);
+		}
+		*/
+	}
+
+}
+
+
+$obj = new obj();
+$obj->run($argv);
