@@ -6,7 +6,7 @@ if(isset($argv[1])) {
     if(!is_array($arr) && empty($arr) ) {
         var_dump($arr);
     } else {
-        echo json_encode($arr,JSON_PRETTY_PRINT),PHP_EOL;
+        echo json_encode($arr,JSON_PRETTY_PRINT|JSON_UNESCAPED_UNICODE),PHP_EOL;
     }
 } else {
     echo 'Usage: jsondecode \'{"name":"zhang san","desc":"IT engineer"}\'';
