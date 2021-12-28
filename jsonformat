@@ -28,9 +28,6 @@ class obj {
 		$lines = explode("\n", $result_pretty);
 
 		//var_dump($lines);
-
-		$pattern = "/\ +/uS";
-
 		foreach ($lines as $k => $v) {
 			// code...
 			$pattern = "/^\ +/";
@@ -45,12 +42,18 @@ class obj {
 			}
 		}
 
-		echo implode("\n", $lines);
-/*
-		if (preg_match_all($pattern, $result_pretty, $m)) {
-			//var_dump($m);
+		$newJsonStr = implode("\n", $lines);
+		if (!json_decode($newJsonStr)) {
+			echo "处理json数据失败",PHP_EOL;
+			die();
 		}
-		*/
+
+		if(!file_put_contents($file1, $newJsonStr)) {
+			echo "写入json数据失败",PHP_EOL;
+			die();
+		}
+		echo "处理json数据成功",PHP_EOL;
+
 	}
 
 }
